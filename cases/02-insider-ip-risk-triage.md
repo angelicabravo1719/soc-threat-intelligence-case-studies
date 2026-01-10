@@ -1,6 +1,6 @@
-# 02 — Possible Insider / IP Risk (Beginner-Friendly Triage)
+# 02 — Possible Insider / IP Risk 
 
-## Learning Note (Honest + Clear)
+## Learning Note 
 This is a **practice scenario** (sanitized and not from a real company incident).  
 I’m documenting how I would think through a possible insider/IP risk situation in **simple, fair terms**—what I would look for, what evidence I would gather, and what actions I would recommend **without assuming bad intent**.
 
@@ -58,7 +58,7 @@ Treat it as **sensitive**, preserve evidence, and avoid accusing intent until fa
 
 ---
 
-## What evidence I would collect (in plain language)
+## What evidence I would collect 
 
 ### From file access / content systems
 - Which folders/files were accessed, how many, and at what times
@@ -127,7 +127,7 @@ Bulk access alone can be normal. **Bulk access + creating a zip + external shari
 
 ---
 
-## How I decide what to do next (Decision Rules)
+## How I decide what to do next 
 - If there is clear evidence that sensitive data left to an unapproved destination → escalate quickly and contain
 - If the activity is unusual but impact isn’t clear → preserve evidence, limit exposure carefully, keep investigating
 - If a valid business reason is confirmed → document and close or monitor
@@ -163,5 +163,5 @@ Bulk access alone can be normal. **Bulk access + creating a zip + external shari
 
 ---
 
-## Executive Summary (easy to read)
+## Summary 
 A user account showed unusual after-hours activity: accessing a large number of files in “Design Docs,” creating a `.zip` archive, and creating a share link to a personal Gmail address. There may be normal explanations (working late or an approved transfer), but the combination of **bulk access + bundling files + external sharing** is a stronger signal that needs review. The immediate priority is to preserve the evidence, confirm whether sensitive/IP material was involved, and determine whether any data actually left the company (for example, whether the share link was downloaded or files were uploaded/copied). If the external share appears unapproved, the recommended next step is to revoke the link (while preserving evidence) and escalate through the proper security/HR/legal process. Confidence improves once cloud audit logs, endpoint indicators (archive creation/USB), and baseline behavior comparisons are reviewed.
