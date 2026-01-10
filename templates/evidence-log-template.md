@@ -1,4 +1,4 @@
-# OSINT Evidence Log (Beginner-Friendly)
+# OSINT Evidence Log
 
 ## What am I trying to verify?
 - Claim / question:
@@ -9,7 +9,7 @@
 - No social engineering, no password attempts, no doxxing
 - Collect only what’s necessary
 
-## Evidence entries (copy/paste this block per source)
+## Evidence entries
 ### Entry #
 - Source name:
 - Source type: (Primary / Secondary / User-generated)
