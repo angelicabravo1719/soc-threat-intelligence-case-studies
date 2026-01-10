@@ -127,14 +127,5 @@ User reports clicking a link from an unexpected message; a new browser tab opene
 
 ---
 
-## Confidence
-- Confidence level: (Low / Medium / High)
-- What would increase confidence:
-  - DNS/proxy logs confirming destination and redirect chain
-  - Auth logs showing anomalous sign-ins after the click
-  - Confirmation whether credentials were entered / file downloaded
-
----
-
-## Executive Summary (Stakeholder-Friendly)
+## Summary
 A user clicked a link from an unexpected message that directed them to a suspicious domain consistent with a lookalike/typosquat pattern. Based on initial review and OSINT validation, this activity is assessed as likely credential-phishing (confidence: <Low/Med/High>). Immediate recommended actions are to preserve the original message, block the domain (if confirmed malicious), and verify whether credentials were entered; if so, reset credentials and review authentication logs for anomalous sign-ins. Next steps include correlating DNS/proxy/browser timestamps (if available) and issuing a brief awareness note if similar messages are circulating.
