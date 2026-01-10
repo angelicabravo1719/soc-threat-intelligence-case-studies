@@ -2,150 +2,166 @@
 
 ## Learning Note (Honest + Clear)
 This is a **practice scenario** (sanitized and not from a real company incident).  
-I’m documenting how I would think through a potential insider/IP risk situation: what signals matter, what evidence to gather, and how to recommend next steps **without jumping to conclusions**.
+I’m documenting how I would think through a possible insider/IP risk situation in **simple, fair terms**—what I would look for, what evidence I would gather, and what actions I would recommend **without assuming bad intent**.
 
 ---
 
 ## What happened (Trigger)
-A user account is showing unusual behavior: a spike in file access/downloads and/or activity involving external storage or external sharing. We need to determine if this is normal work activity or a potential risk.
+A user account is showing unusual behavior: a spike in file access/downloads and activity that *might* involve sharing files outside the company. We need to figure out if this is normal work activity or a potential risk.
+
+### Scenario (practice)
+- User: Engineer on a product team  
+- Time window: 9:30 PM–1:00 AM (after hours)  
+- Activity: accessed ~1,200 files in “Design Docs”  
+- Action: created a `.zip` file named `project_docs_backup.zip`  
+- Also: created a share link to an external Gmail address  
+- Context: business reason unknown (not confirmed)
 
 ---
 
 ## The 4 things I’m trying to figure out
-1) Is this behavior **normal** for the user’s job, or unusual?
-2) What data might be involved (sensitivity / IP / confidential info)?
-3) Is there any sign of **data leaving** the company (exfiltration)?
+1) Is this activity **normal** for this person’s role, or unusual?
+2) What kind of files are involved—could any be **sensitive** (IP/confidential)?
+3) Is there a clear sign the data **left the company** (shared, uploaded, copied)?
 4) What should we do **right now** to reduce risk while staying fair and accurate?
 
 ---
 
 ## What we know vs what we don’t know (Scope)
+
 ### What we know
 - Who the user is + their role/team (if available)
-- What systems were involved (file server, SharePoint/Drive, code repo, etc.)
-- Rough timing (when the unusual activity occurred)
+- Where the activity happened (file system / cloud drive / code repo, etc.)
+- When it happened (time window)
+- It happened after hours and was higher volume than typical
+- A `.zip` was created, which can mean “bundling files together”
+- A share link went to a personal email, which could be a “data leaving” path
 
 ### What we don’t know yet
-- Whether the user had a valid business reason (deadline, role change, project)
-- Whether the files were sensitive
-- Whether the data actually left the environment (uploaded/shared/copied)
+- Whether there was a valid work reason (deadline, approved transfer, role change)
+- Whether the files were actually sensitive
+- Whether the share link was used (downloaded) or just created
 
 ### Safe assumption
-Treat it as **sensitive** and preserve evidence, but avoid labeling intent until evidence supports it.
+Treat it as **sensitive**, preserve evidence, and avoid accusing intent until facts support it.
 
 ---
 
 ## First 10 minutes (simple checklist)
-- Identify the user + time window of activity
-- Confirm what “unusual” means (higher volume than baseline? off-hours? new destination?)
-- Preserve the most important logs (timestamps matter)
-- Determine what data types were accessed (sensitive vs normal)
-- Check if any “data leaving” path exists (external share, uploads, USB)
-- Write a short summary: facts, what’s unknown, and recommended next step
+- Identify the user + exact time window
+- Confirm what makes it “unusual” (after hours, volume, new destination)
+- Preserve key logs (timestamps matter)
+- Check what type of data was accessed (sensitive vs normal work files)
+- Check for any “data leaving” path (external share, uploads, USB)
+- Confirm whether external sharing is allowed and if that external recipient is approved
+- Write a short summary: what we know, what we don’t know, and the next step
 
 ---
 
 ## What evidence I would collect (in plain language)
 
 ### From file access / content systems
-- File access logs (which folders/files, how many, what times)
-- Sensitivity labels (if the org uses them) or location of sensitive projects
-- Bulk actions (mass downloads, mass copy, zip/compression)
+- Which folders/files were accessed, how many, and at what times
+- Whether any of the folders are known to contain sensitive/IP content
+- Signs of bulk actions (mass download/copy or lots of files touched quickly)
+- A short list of the top folders/files accessed + timestamps
 
-### From cloud collaboration tools (SharePoint/Google Drive/OneDrive/etc.)
-- Audit logs: new external shares, link creation, permission changes
-- Large downloads or sync behavior
-- New external domains or recipients
+### From cloud tools (SharePoint/Google Drive/OneDrive/etc.)
+- Audit logs showing: share link created, permissions, and who it was sent to
+- Whether the link allowed download and whether any download actually occurred
+- Any new external recipients/domains (like personal email)
 
-### From endpoint (the user’s computer) — if available
-- USB insertion events / file copy to removable drives
-- New compression tools or unusual processes
-- Large archive creation (zip/rar/7z)
+### From the user’s computer (endpoint) — if available
+- Evidence the `.zip` was created (tool used + where it was created)
+- Any USB use (plug-in events / file copy to removable drive)
+- Any unusual new tools used for bundling or transferring files
 
-### From identity/authentication (logins)
-- VPN/logins at unusual hours
-- New devices or new locations
-- Multiple failed logins or “impossible travel” style patterns
+### From login/authentication logs
+- Whether the user logged in from a new device or new location
+- Any unusual VPN activity or logins at strange times
+- Any signs that the account could be compromised (lots of failed logins, etc.)
 
-### HR/Context signals (only via proper channels)
-- Departure notice / resignation timeline
-- Recent access changes or role transitions
-- Prior policy reminders or prior issues (if applicable)
+### HR / context signals (only through proper channels)
+- Role changes, project transitions, or offboarding context (if relevant)
+- Anything that helps explain whether this behavior could be normal
 
 ---
 
 ## What I can do now vs what I’d ask for on a real security team
 
 ### What I can do now (as a learner)
-- Explain common insider/IP risk patterns (staging, bulk downloads, off-hours activity)
-- Think in timelines and correlate “what happened first”
-- Document facts vs assumptions clearly
-- Propose fair next steps that preserve evidence and reduce risk
+- Recognize common “risk patterns” (bulk access, bundling files, external sharing)
+- Build a timeline and explain what happened in plain language
+- Separate facts from assumptions and document confidence
+- Suggest next steps that protect data without overreacting
 
 ### What I would ask for in an enterprise/SOC
-- SIEM view: file access + cloud audit + auth + endpoint events in one timeline
-- EDR telemetry: processes, archives created, external device activity
-- DLP alerts: attempted uploads/shares of sensitive files (if available)
-- Case management context and approved escalation path (security/HR/legal)
+- A SIEM timeline view combining file access + cloud audit + auth + endpoint logs
+- Endpoint security/EDR telemetry to confirm file staging and transfers
+- DLP alerts (if available) for sensitive files being uploaded/shared externally
+- The approved escalation path and process (security/HR/legal)
 
 ---
 
 ## What I think might be happening (Analysis)
-This situation could be **benign or risky**. My job is to evaluate signals without assuming intent.
+This could be **normal work** or a **potential risk**. My job is to evaluate signals and avoid jumping to conclusions.
 
-### Benign possibilities
-- Deadline-driven work (end-of-quarter / deliverable crunch)
-- Role change requiring access to new files
-- Approved transfer or backup process
+### Normal possibilities
+- Deadline-driven work (someone working late)
+- Approved transfer/backup process
+- Role or project change requiring extra file access
 
 ### Higher-risk possibilities
-- “Staging” behavior: collecting and bundling files (zip/rar) before transfer
-- New external destinations: personal email, personal cloud, unfamiliar domains
-- Off-hours bulk access + new device/location
-- Accessing data unrelated to job role (“curiosity browsing” in sensitive areas)
+- “Staging” behavior: collecting lots of files and bundling them into a `.zip`
+- External share to a personal email account (common risk path)
+- After-hours bulk access that is unusual for the person’s baseline
+- Accessing files outside the user’s normal job needs
 
 ### What would confirm higher risk
-- Evidence of data leaving: external shares, uploads, USB copying
-- Strong anomalies vs baseline (volume/time/type of data)
-- Correlation with departure timeline (if known via proper channels)
+- Evidence that data actually left the company (downloaded via link, uploaded externally, copied to USB)
+- Strong anomaly vs baseline (volume/time/data type doesn’t match typical work)
+- Correlation with additional context (only via proper channels)
+
+### Important note
+Bulk access alone can be normal. **Bulk access + creating a zip + external sharing** is a stronger risk signal than any one event by itself.
 
 ---
 
 ## How I decide what to do next (Decision Rules)
-- If there is clear evidence of data leaving to an unapproved destination → escalate and contain quickly
-- If it’s unusual but impact is unclear → preserve evidence, limit exposure carefully, and keep investigating
-- If behavior matches a valid business reason (confirmed) → document and close or monitor
+- If there is clear evidence that sensitive data left to an unapproved destination → escalate quickly and contain
+- If the activity is unusual but impact isn’t clear → preserve evidence, limit exposure carefully, keep investigating
+- If a valid business reason is confirmed → document and close or monitor
+- If the external share link allows download and goes to a personal email → recommend revoking the link (while preserving evidence) and escalating
 
 ---
 
 ## Recommended actions
 
 ### Right now
-- Preserve logs and document timeline (who/what/when)
-- Identify whether sensitive/IP data was involved
-- Look for clear “data leaving” signals (external share/upload/USB)
+- Preserve logs and document the timeline (who/what/when)
+- Confirm whether the accessed folder includes sensitive/IP material
+- Determine whether data left the environment (external link downloads/uploads/USB)
 
 ### Soon
 - Escalate through the correct internal process (security/HR/legal) if risk is credible
-- Reduce exposure with minimal disruption (least privilege / temporary controls) if appropriate
-- Create an investigation-ready summary: facts, confidence, next steps
+- Reduce exposure in a minimal-disruption way (least privilege / temporary controls) if appropriate
+- Write an investigation-ready summary: facts, unknowns, confidence, next steps
 
 ### Longer-term
-- Improve controls and monitoring around sensitive repositories
-- Training/awareness for safe handling of confidential/IP material
-- Review access policies (least privilege) and offboarding process
+- Stronger controls/monitoring for sensitive repositories
+- Training/awareness on handling confidential/IP data
+- Review access policies (least privilege) and offboarding processes
 
 ---
 
 ## Confidence (how sure am I?)
 - Confidence: Low / Medium / High
 - What would make me more sure:
-  - Cloud audit logs confirming external shares/uploads
-  - Endpoint evidence of USB copying or archive creation
-  - Baseline comparison showing activity is truly abnormal for that role
+  - Cloud audit logs confirming the share link details and whether a download occurred
+  - Endpoint evidence showing the archive was created and whether USB was used
+  - Baseline comparison showing this activity is truly unusual for this role/user
 
 ---
 
-## Summary
-A user account showed unusual file access behavior that could indicate either normal work activity or potential insider/IP risk. At this stage, intent is unknown, so the priority is to preserve evidence, clarify whether sensitive data was involved, and determine if any data left the environment via external sharing, uploads, or removable media. If evidence suggests an unapproved transfer path, the recommended next step is escalation through the proper security/HR/legal process and careful containment actions (least privilege, temporary restrictions) while maintaining accurate documentation. Confidence will increase with cloud audit logs, endpoint indicators (USB/archive creation), and baseline comparisons for the user’s normal activity.
-
+## Executive Summary (easy to read)
+A user account showed unusual after-hours activity: accessing a large number of files in “Design Docs,” creating a `.zip` archive, and creating a share link to a personal Gmail address. There may be normal explanations (working late or an approved transfer), but the combination of **bulk access + bundling files + external sharing** is a stronger signal that needs review. The immediate priority is to preserve the evidence, confirm whether sensitive/IP material was involved, and determine whether any data actually left the company (for example, whether the share link was downloaded or files were uploaded/copied). If the external share appears unapproved, the recommended next step is to revoke the link (while preserving evidence) and escalate through the proper security/HR/legal process. Confidence improves once cloud audit logs, endpoint indicators (archive creation/USB), and baseline behavior comparisons are reviewed.
