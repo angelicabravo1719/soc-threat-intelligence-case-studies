@@ -146,6 +146,6 @@ This situation could be **benign or risky**. My job is to evaluate signals witho
 
 ---
 
-## Executive Summary (easy to read)
+## Summary
 A user account showed unusual file access behavior that could indicate either normal work activity or potential insider/IP risk. At this stage, intent is unknown, so the priority is to preserve evidence, clarify whether sensitive data was involved, and determine if any data left the environment via external sharing, uploads, or removable media. If evidence suggests an unapproved transfer path, the recommended next step is escalation through the proper security/HR/legal process and careful containment actions (least privilege, temporary restrictions) while maintaining accurate documentation. Confidence will increase with cloud audit logs, endpoint indicators (USB/archive creation), and baseline comparisons for the user’s normal activity.
 
