@@ -1,4 +1,4 @@
-# 01 — Suspicious Link / Domain Click (Beginner-Friendly Triage)
+# 01 — Suspicious Link / Domain Click 
 
 ## Learning Note (Honest + Clear)
 This is a **practice scenario** (sanitized and not from a real company incident).  
@@ -46,7 +46,7 @@ Treat it as suspicious until we confirm it’s safe.
 
 ---
 
-## What evidence I would collect (in plain language)
+## What evidence I would collect 
 
 ### From the message (email/text/chat)
 - Screenshot of the message
@@ -59,7 +59,7 @@ Treat it as suspicious until we confirm it’s safe.
 - Downloads list (shows if a file was saved)
 - Any security warnings/alerts that popped up
 
-### From company logs (if you have access in a real job)
+### From company logs (if I have access)
 - DNS logs (shows what website names the computer tried to reach)
 - Proxy/firewall logs (shows what sites were contacted and how much data moved)
 - Login/auth logs (shows if there were weird logins after the click)
@@ -100,7 +100,7 @@ Most likely: **phishing** (a fake login page trying to steal credentials).
 
 ---
 
-## How I decide what to do next (Decision Rules)
+## How I decide what to do next 
 - If the domain clearly looks fake AND OSINT is bad → treat as phishing and recommend blocking it
 - If the user typed their password → reset password + confirm MFA + review sign-in activity
 - If something downloaded → treat as potential malware and request endpoint checks
@@ -140,5 +140,5 @@ Most likely: **phishing** (a fake login page trying to steal credentials).
 
 ---
 
-## Executive Summary (easy to read)
+## Summary
 A user clicked a suspicious link from an unexpected message and saw what looked like a login page. This is likely a phishing attempt (confidence: <Low/Med/High>) because the behavior matches common credential-stealing scams. The immediate next step is to preserve the message and link, confirm whether credentials were entered, and—if so—reset the password and review recent sign-ins. If the domain is confirmed malicious, it should be blocked and other users should be warned about similar messages.
