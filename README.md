@@ -1,25 +1,50 @@
-# soc-threat-intelligence-case-studies
+SOC Threat Intelligence Case Studies
+Hands-on security investigations by a graduate student in Information Systems (Cybersecurity specialization), demonstrating analyst-level SOC workflows — from initial signal triage through OSINT validation and escalation-ready documentation.
+Scope of Work
+Across these investigations, I focus on:
 
-Short, evidence-based investigation writeups that demonstrate how I triage security signals, validate OSINT, and communicate recommendations. 
+Identifying and triaging suspicious security activity
+Collecting and analyzing relevant artifacts (logs, indicators, screenshots)
+Validating findings using open-source intelligence (OSINT)
+Differentiating confirmed evidence from assumptions
+Translating technical findings into business-relevant risk
+Producing clear, escalation-ready documentation
 
-## Learning Context (Transparent Note)
+Investigation Approach
+Each case follows a structured methodology aligned with SOC workflows:
 
-These writeups are **sanitized, scenario-based exercises**. I have not worked in a production SOC yet, so the goal here is to demonstrate my **investigation process**:
+Define scope (who/what/when/where)
+Collect available artifacts and indicators
+Perform analysis and correlate findings
+Validate using OSINT and supporting evidence
+Assess impact and risk level
+Recommend next steps and document findings
 
-- Define scope (who/what/when/where) and separate **facts vs assumptions**
-- Identify what **artifacts I can collect today** vs what I would **request in an enterprise** (SIEM/EDR/proxy/file access logs)
-- Validate with **ethical OSINT** and correlation
-- Produce a clear **executive summary** with confidence level and next steps
+Tools & Frameworks
 
-This approach helps me build strong foundations in triage, documentation, and communication that transfer directly to real security operations.
+OSINT Tools: VirusTotal, Shodan, WHOIS, URLScan.io
+Frameworks: MITRE ATT&CK, NIST Incident Response Lifecycle
+Documentation: Markdown-based case files with structured evidence logs
 
-## Cases
-- 01 — Suspicious Domain Click: triage + artifacts + decision points
-- 02 — Insider/IP Risk: signals, validation, and escalation-ready documentation
+Case Studies
+01 — Suspicious Domain Click
 
-## My Investigation Method
-1) Clarify scope (who/what/when/where)
-2) Collect artifacts (logs, endpoint indicators, screenshots)
-3) Validate (OSINT + correlation)
-4) Assess impact and risk
-5) Recommend actions + document cleanly
+Initial triage of a potentially malicious domain interaction
+Focus: artifact collection, indicator validation, decision points
+Techniques: WHOIS lookup, VirusTotal domain reputation analysis, timeline reconstruction
+
+02 — Insider/IP Risk Signals
+
+Investigation of internal activity with potential risk indicators
+Focus: signal validation, escalation readiness, documentation clarity
+Techniques: log correlation, behavioral baseline comparison, risk-tiered documentation
+
+Analyst Perspective
+These investigations demonstrate how a security analyst approaches:
+
+Ambiguous or incomplete data
+Early-stage signal validation
+Evidence-based decision-making
+Clear communication under uncertainty
+
+The emphasis is not just on identifying threats, but on structured thinking, documentation, and defensible conclusions — translating technical findings into business-relevant risk insights for both technical and non-technical stakeholders.
