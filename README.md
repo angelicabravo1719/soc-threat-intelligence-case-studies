@@ -1,4 +1,4 @@
-# Security Intelligence Mini-Cases
+# soc-threat-intelligence-case-studies
 
 Short, evidence-based investigation writeups that demonstrate how I triage security signals, validate OSINT, and communicate recommendations. 
 
