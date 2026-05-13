@@ -1,70 +1,91 @@
 # SOC Threat Intelligence Case Studies
 
-Hands-on security investigations by a graduate student in Information Systems with a Cybersecurity specialization, demonstrating analyst-level SOC workflows — from initial signal triage through OSINT validation and escalation-ready documentation.
+This repository contains structured SOC-style threat intelligence and incident investigation case studies designed to simulate real-world analyst workflows. The investigations focus on identifying, validating, documenting, and communicating security events through a combination of OSINT research, IOC analysis, MITRE ATT&CK mapping, evidence correlation, and escalation-oriented reporting.
+
+The purpose of this repository is to strengthen practical cybersecurity analysis skills while demonstrating structured investigative thinking, technical documentation, and risk-focused communication commonly used within SOC, threat intelligence, and incident response environments.
 
 ---
 
 ## Scope of Work
 
-Across these investigations, I focus on:
+The investigations within this repository focus on:
 
-- Identifying and triaging suspicious security activity
-- Collecting and analyzing relevant artifacts, including logs, indicators, and screenshots
-- Validating findings using open-source intelligence (OSINT)
-- Differentiating confirmed evidence from assumptions
+- SOC-style alert triage and incident investigation workflows
+- OSINT validation and threat enrichment techniques
+- IOC analysis and contextual risk assessment
+- MITRE ATT&CK framework mapping
+- Evidence collection and correlation
+- Escalation-ready analyst documentation
 - Translating technical findings into business-relevant risk
-- Producing clear, escalation-ready documentation
+- Differentiating confirmed evidence from assumptions during investigations
 
 ---
 
-## Investigation Approach
+## Investigation Methodology
 
-Each case follows a structured methodology aligned with SOC workflows:
+Each case study follows a structured investigation approach intended to mirror operational SOC and threat analysis workflows:
 
-1. Define scope: who, what, when, and where
-2. Collect available artifacts and indicators
-3. Perform analysis and correlate findings
-4. Validate using OSINT and supporting evidence
-5. Assess impact and risk level
-6. Recommend next steps and document findings
+1. Initial alert or suspicious activity identification
+2. Evidence collection and validation
+3. IOC enrichment and OSINT investigation
+4. MITRE ATT&CK tactic and technique mapping
+5. Risk and impact assessment
+6. Analyst findings and escalation recommendations
+7. Documentation of investigation artifacts and supporting evidence
+
+---
+
+## Investigation Categories
+
+- Phishing and suspicious domain investigations
+- Insider threat and unauthorized access analysis
+- PowerShell and endpoint activity investigations
+- IOC validation and enrichment workflows
+- OSINT-based threat verification
+- Escalation-ready SOC documentation
+- Threat triage and evidence correlation
 
 ---
 
 ## Tools & Frameworks
 
-**OSINT Tools:** VirusTotal, Shodan, WHOIS, URLScan.io  
-**Frameworks:** MITRE ATT&CK, NIST Incident Response Lifecycle  
-**Documentation:** Markdown-based case files with structured evidence logs
+| Category | Tools / Frameworks |
+|---|---|
+| OSINT | VirusTotal, URLScan.io, WHOIS, AbuseIPDB |
+| Network Analysis | Wireshark |
+| Documentation | Markdown, evidence logging, IOC tracking |
+| Frameworks | MITRE ATT&CK, NIST Incident Response Lifecycle |
+| Operating Systems | Windows, Ubuntu (WSL) |
+| Investigation Workflow | IOC enrichment, evidence correlation, escalation documentation |
 
 ---
 
-## Case Studies
+## Current Investigations
 
-### 01 — Suspicious Domain Click
-
-Initial triage of a potentially malicious domain interaction.
-
-**Focus:** Artifact collection, indicator validation, and decision points  
-**Techniques:** WHOIS lookup, VirusTotal domain reputation analysis, timeline reconstruction
-
----
-
-### 02 — Insider/IP Risk Signals
-
-Investigation of internal activity with potential risk indicators.
-
-**Focus:** Signal validation, escalation readiness, and documentation clarity  
-**Techniques:** Log correlation, behavioral baseline comparison, risk-tiered documentation
+| Case | Focus Area | Status |
+|---|---|---|
+| Case 01 – Suspicious Domain Click | Phishing / OSINT Investigation | In Progress |
+| Case 02 – Insider IP Risk | Unauthorized Access Analysis | In Progress |
+| Case 03 – Malicious PowerShell Activity | Endpoint / Execution Analysis | In Progress |
 
 ---
 
-## Analyst Perspective
+## Repository Structure
 
-These investigations demonstrate how a security analyst approaches:
-
-- Ambiguous or incomplete data
-- Early-stage signal validation
-- Evidence-based decision-making
-- Clear communication under uncertainty
-
-The emphasis is not just on identifying threats, but on structured thinking, documentation, and defensible conclusions — translating technical findings into business-relevant risk insights for both technical and non-technical stakeholders.
+```plaintext
+soc-threat-intelligence-case-studies/
+│
+├── README.md
+│
+├── cases/
+│   ├── case-01-suspicious-domain-click/
+│   ├── case-02-insider-ip-risk/
+│   └── case-03-malicious-powershell-activity/
+│
+├── templates/
+│   ├── investigation-template.md
+│   ├── incident-report-template.md
+│   ├── evidence-log-template.md
+│   └── ioc-template.md
+│
+└── diagrams/
