@@ -86,6 +86,5 @@ soc-threat-intelligence-case-studies/
 │   ├── investigation-template.md
 │   ├── incident-report-template.md
 │   ├── evidence-log-template.md
-│   └── ioc-template.md
-│
-└── diagrams/
+└── └── ioc-template.md
+
