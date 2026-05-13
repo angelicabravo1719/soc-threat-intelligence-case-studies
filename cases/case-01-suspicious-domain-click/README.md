@@ -1,4 +1,3 @@
-```markdown
 # Case 01 – Suspicious Domain Click Investigation
 
 ## Executive Summary
@@ -128,4 +127,3 @@ Additional investigation artifacts can be found within the following folders:
 - `evidence/`
 - `iocs/`
 - `screenshots/`
-```
