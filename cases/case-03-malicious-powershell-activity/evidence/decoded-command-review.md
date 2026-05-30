@@ -1,31 +1,53 @@
 # Decoded Command Review
 
-## Encoded Command
+## Executed Command
 
 ```powershell
-powershell.exe -EncodedCommand SQBFAFgA...
+Get-Process
 ```
 
-## Decoding Status
+## Command Purpose
 
-Pending investigation.
+The Get-Process cmdlet retrieves a list of processes currently running on a Windows system.
 
-## Decoded Output
+This command is commonly used by:
 
-TBD
+- System administrators
+- IT support personnel
+- Security analysts
+- Incident responders
+
+to review active processes and validate system activity.
+
+## Observed Output
+
+The command successfully returned a list of active processes including:
+
+- chrome
+- Canva
+- AdobeCollabSync
+- backgroundTaskHost
+- browserhost
+- AggregatorHost
+
+No suspicious processes were identified during initial review.
 
 ## Analyst Review
 
-The encoded PowerShell command requires decoding and review before determining whether the activity is legitimate or suspicious.
+The command did not:
 
-The following items should be validated:
+- Download files
+- Execute external content
+- Modify registry settings
+- Establish network connections
+- Create persistence mechanisms
 
-- Network activity
-- File downloads
-- Registry modifications
-- Process creation events
-- Administrative intent
+The activity appears consistent with legitimate administrative or investigative use of PowerShell.
 
-## Preliminary Assessment
+## Analyst Assessment
 
-At the current stage of analysis, insufficient evidence exists to determine whether the command represents malicious activity.
+Based on available evidence, the PowerShell execution appears benign.
+
+The command was successfully executed and produced expected output consistent with normal Windows system administration activities.
+
+No indicators of malicious behavior were identified during this review.
