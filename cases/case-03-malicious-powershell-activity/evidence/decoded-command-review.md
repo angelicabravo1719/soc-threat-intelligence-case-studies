@@ -1,6 +1,12 @@
 # Decoded Command Review
 
-## Executed Command
+## Encoded Command
+
+```powershell
+powershell.exe -EncodedCommand RwBlAHQALQBQAHIAbwBjAGUAcwBzAA==
+```
+
+## Decoded Command
 
 ```powershell
 Get-Process
@@ -8,46 +14,39 @@ Get-Process
 
 ## Command Purpose
 
-The Get-Process cmdlet retrieves a list of processes currently running on a Windows system.
+The Get-Process cmdlet retrieves information about processes currently running on a Windows system.
 
-This command is commonly used by:
+The command is frequently used by:
 
 - System administrators
 - IT support personnel
 - Security analysts
 - Incident responders
 
-to review active processes and validate system activity.
-
-## Observed Output
-
-The command successfully returned a list of active processes including:
-
-- chrome
-- Canva
-- AdobeCollabSync
-- backgroundTaskHost
-- browserhost
-- AggregatorHost
-
-No suspicious processes were identified during initial review.
+to review system activity and identify running processes.
 
 ## Analyst Review
+
+The decoded command was reviewed and determined to perform process enumeration only.
 
 The command did not:
 
 - Download files
-- Execute external content
+- Execute remote content
 - Modify registry settings
-- Establish network connections
-- Create persistence mechanisms
+- Create persistence
+- Escalate privileges
+- Communicate externally
 
-The activity appears consistent with legitimate administrative or investigative use of PowerShell.
+## Supporting Evidence
+
+- powershell-process-enumeration.png
+- encoded-command-generation.png
 
 ## Analyst Assessment
 
-Based on available evidence, the PowerShell execution appears benign.
+The encoded PowerShell command was successfully decoded and analyzed.
 
-The command was successfully executed and produced expected output consistent with normal Windows system administration activities.
+Although encoded commands are commonly associated with suspicious activity, the decoded command performed only process enumeration and demonstrated behavior consistent with legitimate administrative activity.
 
-No indicators of malicious behavior were identified during this review.
+No malicious activity was identified during analysis.
