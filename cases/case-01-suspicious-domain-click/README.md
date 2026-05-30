@@ -1,122 +1,158 @@
-# Case 01 – Suspicious Domain Click Investigation
+# Case 01 – Suspicious URL and Infrastructure Analysis
 
 ## Executive Summary
 
-A user reported interacting with a suspicious Microsoft 365 login page after clicking a link received through email communication. Initial review identified the domain as recently registered and designed to imitate a legitimate authentication portal. Further investigation revealed indicators consistent with credential harvesting activity commonly associated with phishing campaigns targeting enterprise users.
+A suspicious URL was identified through URLHaus and selected for passive threat intelligence analysis. The investigation focused on validating the reputation of the associated infrastructure, identifying potential indicators of compromise (IOCs), and assessing whether the observed activity demonstrated characteristics commonly associated with malware distribution.
 
-The investigation focused on validating the legitimacy of the domain, identifying associated indicators of compromise (IOCs), assessing potential risk exposure, and documenting findings for escalation and remediation purposes.
+The investigation was conducted using publicly available threat intelligence and OSINT resources, including URLHaus, VirusTotal, URLScan, AbuseIPDB, and WHOIS infrastructure analysis. Findings revealed multiple malicious vendor detections, downloadable archive content, ELF-related indicators, and hosting on a direct public IP address utilizing a non-standard service port.
 
-Based on the available evidence, the activity was assessed as malicious with moderate-to-high confidence due to domain impersonation behavior, suspicious registration characteristics, and phishing-related infrastructure indicators identified through OSINT analysis.
+Based on the collected evidence, the indicator was assessed as suspicious with moderate confidence and demonstrated characteristics commonly associated with malware delivery infrastructure.
 
 ---
 
 ## Investigation Overview
 
-| Investigation Detail | Information |
-|---|---|
-| Case ID | CASE-001 |
-| Investigation Type | Phishing / Suspicious Domain Investigation |
-| Detection Source | User-reported suspicious email link |
-| Initial Severity | Medium |
-| Analyst Objective | Validate domain legitimacy and assess phishing risk |
-| Investigation Status | Closed – Malicious Activity Confirmed |
+| Investigation Detail | Information                                                       |
+| -------------------- | ----------------------------------------------------------------- |
+| Case ID              | CASE-001                                                          |
+| Investigation Type   | Threat Intelligence / Infrastructure Analysis                     |
+| Detection Source     | URLHaus                                                           |
+| Initial Severity     | Medium                                                            |
+| Analyst Objective    | Validate the legitimacy and risk associated with a suspicious URL |
+| Investigation Status | Closed – Suspicious Activity Identified                           |
 
 ---
 
 ## Alert Details
 
-A user reported receiving an email containing a hyperlink directing them to what appeared to be a Microsoft 365 authentication portal. After clicking the link, the user observed unusual formatting and reported the activity to the security team for validation.
+The investigated indicator originated from URLHaus, a public threat intelligence platform used to track potentially malicious URLs and malware distribution infrastructure.
 
-Initial triage identified several suspicious characteristics including:
-- Recently registered domain activity
-- Typosquatting behavior
-- Suspicious hosting reputation
-- Login page impersonation
-- Potential credential harvesting indicators
+The URL under investigation was:
 
-The domain was isolated for further analysis and reviewed through multiple OSINT and threat intelligence sources.
+```text
+hxxp://123.10.239[.]8:56074/i
+```
+
+Initial observations identified several characteristics warranting further investigation:
+
+* Direct IP-based URL rather than a registered domain
+* Non-standard service port (56074)
+* Association with downloadable content
+* Listing within a public malware tracking platform
+* Potential malware distribution indicators
+
+The indicator was subjected to passive analysis through multiple intelligence sources.
 
 ---
 
 ## Evidence Collected
 
 ### Evidence Sources
-- WHOIS domain registration lookup
-- VirusTotal domain analysis
-- URLScan page behavior review
-- DNS resolution checks
-- Screenshot comparison against legitimate login portals
+
+* URLHaus
+* VirusTotal
+* URLScan
+* AbuseIPDB
+* WHOIS Infrastructure Review
 
 ### Key Findings
-- Domain registration age was less than 30 days
-- Domain naming convention attempted to imitate Microsoft authentication services
-- Hosting infrastructure showed low reputation scoring
-- External intelligence sources flagged suspicious activity associations
-- Login page appearance attempted to mimic legitimate Microsoft branding
+
+* URL listed within URLHaus malware tracking database
+* VirusTotal identified multiple malicious detections
+* Downloadable ZIP archive content observed
+* ELF-related indicators identified
+* Infrastructure hosted on a direct public IP address
+* Service operated over a non-standard port
+* URLScan was unable to successfully retrieve page content
+* AbuseIPDB contained prior abuse reports associated with the IP address
 
 ---
 
 ## OSINT Findings
 
-| Source | Finding |
-|---|---|
-| WHOIS Lookup | Recently registered domain with limited registration history |
-| VirusTotal | Suspicious reputation and phishing-related detections identified |
-| URLScan.io | Login page impersonation behavior observed |
-| DNS Review | Hosted on infrastructure with limited reputation history |
-| AbuseIPDB | Related infrastructure showed prior abuse reports |
+| Source     | Finding                                                     |
+| ---------- | ----------------------------------------------------------- |
+| URLHaus    | Indicator listed within malware tracking database           |
+| VirusTotal | 4 security vendors identified malicious activity            |
+| VirusTotal | Content type identified as application/zip                  |
+| VirusTotal | Tags included downloads-zip and downloads-elf               |
+| URLScan    | Unable to successfully retrieve content                     |
+| AbuseIPDB  | IP address contained prior abuse reports                    |
+| WHOIS      | Infrastructure owned by China Unicom Henan Province Network |
 
-The collected OSINT data supported the assessment that the domain was likely being used for phishing and credential harvesting operations.
+The collected intelligence suggested the infrastructure was associated with suspicious activity and warranted additional review.
 
 ---
 
 ## MITRE ATT&CK Mapping
 
-| Tactic | Technique | ID |
-|---|---|---|
-| Initial Access | Phishing: Spearphishing Link | T1566.002 |
-| Credential Access | Input Capture | T1056 |
-| Reconnaissance | Gather Victim Identity Information | T1589 |
-| Defense Evasion | Masquerading | T1036 |
+| Tactic               | Technique                      | ID        | Evidence                                   |
+| -------------------- | ------------------------------ | --------- | ------------------------------------------ |
+| Initial Access       | Phishing: Spearphishing Link   | T1566.002 | Suspicious URL delivery                    |
+| Execution            | User Execution                 | T1204     | Downloadable content delivered from URL    |
+| Resource Development | Acquire Infrastructure         | T1583     | Infrastructure hosted on public IP address |
+| Command and Control  | Non-Application Layer Protocol | T1095     | Non-standard port usage observed           |
 
 ---
 
 ## Indicators of Compromise (IOCs)
 
-| IOC Type | Value | Context |
-|---|---|---|
-| Domain | login-microsoft-authenticate[.]com | Suspected phishing domain |
-| URL | hxxps://login-microsoft-authenticate[.]com | Credential harvesting page |
-| IP Address | 185.xxx.xxx.xxx | Hosting infrastructure |
-| Email Subject | “Account Verification Required” | Social engineering lure |
+| IOC Type       | Value                               | Context                                     |
+| -------------- | ----------------------------------- | ------------------------------------------- |
+| URL            | hxxp://123.10.239[.]8:56074/i       | Suspicious URL selected for investigation   |
+| IP Address     | 123.10.239.8                        | Infrastructure serving downloadable content |
+| Port           | 56074                               | Non-standard service port                   |
+| ASN            | AS4837                              | Infrastructure ownership                    |
+| Organization   | China Unicom Henan Province Network | Network owner                               |
+| Country        | China                               | Infrastructure location                     |
+| Content Type   | application/zip                     | Downloadable archive content                |
+| File Indicator | downloads-elf                       | Potential Linux executable delivery         |
 
 ---
 
 ## Analyst Assessment
 
-Based on the evidence collected during the investigation, the domain activity was assessed as malicious with moderate-to-high confidence. The domain demonstrated characteristics commonly associated with phishing infrastructure, including impersonation of trusted services, recent registration activity, and suspicious reputation indicators identified through external intelligence platforms.
+Based on passive threat intelligence analysis, the investigated URL demonstrated multiple indicators consistent with suspicious or potentially malicious activity.
 
-No confirmed credential compromise was identified during the investigation; however, due to the nature of the interaction, the affected user account should be monitored for suspicious authentication activity and password reset procedures should be considered.
+The indicator was identified through URLHaus and subsequently reviewed using VirusTotal, URLScan, AbuseIPDB, and WHOIS infrastructure analysis. VirusTotal identified multiple vendor detections and classified the content as a downloadable ZIP archive with ELF-related indicators. Additional analysis revealed the infrastructure was hosted on a direct public IP address using a non-standard service port.
 
-The investigation highlights the continued risk posed by credential harvesting campaigns leveraging trusted brand impersonation techniques to target enterprise users.
+While AbuseIPDB reporting alone was insufficient to classify the infrastructure as malicious, the combination of threat intelligence sources, downloadable content indicators, and malicious vendor classifications increased the overall risk assessment.
+
+No direct interaction with the URL was performed during the investigation. Findings were based exclusively on passive OSINT and threat intelligence sources.
 
 ---
 
 ## Recommendations
 
-- Block the identified domain and associated IP infrastructure
-- Reset credentials for potentially affected accounts
-- Review authentication logs for anomalous login activity
-- Increase monitoring for similar phishing indicators
-- Conduct phishing awareness reinforcement for affected users
-- Enable or verify MFA enforcement on impacted systems
-- Preserve collected evidence for future reference and correlation
+* Block the identified URL and associated IP address if observed within the environment
+* Monitor for related infrastructure and indicators
+* Review security controls capable of detecting suspicious downloads
+* Continue monitoring threat intelligence sources for updated classifications
+* Preserve collected evidence for future correlation activities
+* Educate users regarding suspicious links and downloadable content
 
 ---
 
 ## Conclusion
 
-The investigation determined that the reported domain activity was consistent with a phishing and credential harvesting attempt targeting enterprise authentication workflows. Through OSINT validation, IOC enrichment, and evidence correlation, the domain was confirmed as suspicious and appropriate remediation recommendations were documented for escalation and defensive response activities.
+The investigation identified a suspicious URL associated with downloadable archive content and multiple malicious detections across public threat intelligence platforms.
+
+Analysis of supporting infrastructure revealed hosting on a public IP address associated with China Unicom network infrastructure and operation over a non-standard service port. While infrastructure ownership alone did not indicate malicious activity, the totality of evidence supported classification of the indicator as suspicious and worthy of further monitoring.
+
+This case demonstrates the importance of correlating multiple threat intelligence sources when evaluating potentially malicious infrastructure and highlights the value of passive OSINT techniques within SOC investigation workflows.
+
+---
+
+## Investigation Workflow
+
+1. Indicator identified through URLHaus
+2. Reputation review performed using VirusTotal
+3. Infrastructure analysis attempted through URLScan
+4. IP reputation reviewed through AbuseIPDB
+5. WHOIS and infrastructure ownership validated
+6. Indicators documented and correlated
+7. MITRE ATT&CK mapping performed
+8. Analyst assessment completed
 
 ---
 
@@ -124,6 +160,6 @@ The investigation determined that the reported domain activity was consistent wi
 
 Additional investigation artifacts can be found within the following folders:
 
-- `evidence/`
-- `iocs/`
-- `screenshots/`
+* `evidence/`
+* `iocs/`
+* `screenshots/`
