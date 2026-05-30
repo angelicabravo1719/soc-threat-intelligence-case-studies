@@ -1,12 +1,14 @@
-# Case 03 – Suspicious Encoded PowerShell Execution Investigation
+# Case 03 – Suspicious Encoded PowerShell Activity
 
 ## Executive Summary
 
-A security monitoring alert identified PowerShell executing with encoded command-line arguments on a Windows workstation. Encoded PowerShell commands are frequently used by administrators for automation purposes; however, they are also commonly leveraged by threat actors to conceal malicious activity and evade detection.
+A suspicious PowerShell execution event was identified involving the use of an encoded command-line argument. Because PowerShell encoding is commonly used to conceal command intent, the activity was selected for investigation to determine whether it represented legitimate administrative activity or potential malicious behavior.
 
-The investigation focused on validating the legitimacy of the PowerShell execution, reviewing command-line behavior, identifying potential indicators of compromise (IOCs), and assessing the likelihood of malicious activity. Endpoint artifacts, process execution details, and supporting evidence were reviewed to determine whether escalation or containment actions were warranted.
+The investigation focused on decoding the command, analyzing its functionality, reviewing associated process activity, and determining whether the observed behavior aligned with known malicious PowerShell techniques.
 
-Based on the available evidence, the activity was assessed as suspicious pending additional validation. Several characteristics commonly associated with malicious PowerShell usage were identified, including encoded command execution, script obfuscation indicators, and execution behavior inconsistent with normal user activity.
+The encoded command was successfully decoded and determined to execute the PowerShell cmdlet `Get-Process`, which performs process enumeration on a Windows system. No evidence of malware execution, persistence mechanisms, privilege escalation, or external communication was identified.
+
+Based on the available evidence, the activity was classified as legitimate administrative behavior and closed as benign.
 
 ---
 
@@ -16,26 +18,26 @@ Based on the available evidence, the activity was assessed as suspicious pending
 |---|---|
 | Case ID | CASE-003 |
 | Investigation Type | Endpoint Investigation / PowerShell Analysis |
-| Detection Source | Security Monitoring Alert |
+| Detection Source | PowerShell Monitoring Alert |
 | Initial Severity | Medium |
-| Analyst Objective | Determine whether PowerShell activity is legitimate or malicious |
-| Investigation Status | Monitoring / Under Review |
+| Analyst Objective | Determine whether encoded PowerShell execution was malicious |
+| Investigation Status | Closed – Benign Activity |
 
 ---
 
 ## Alert Details
 
-A security monitoring alert identified PowerShell executing with encoded command-line arguments on a Windows endpoint. The activity originated from a user workstation and triggered detection rules designed to identify potentially suspicious scripting behavior.
+A monitoring alert identified PowerShell executing with encoded command-line arguments.
 
-Initial triage identified several unusual characteristics including:
+Encoded PowerShell commands are commonly used for:
 
-- Encoded PowerShell execution
-- Potential script obfuscation
-- Unusual parent-child process relationship
-- Execution outside expected administrative workflows
-- Possible defense evasion indicators
+- Administrative automation
+- Script execution
+- Configuration management
+- Command obfuscation
+- Malware delivery and execution
 
-The affected endpoint and associated process execution details were isolated for further investigation.
+Because encoded commands conceal the underlying command from casual review, further analysis was required to determine the true purpose of the execution.
 
 ---
 
@@ -43,45 +45,78 @@ The affected endpoint and associated process execution details were isolated for
 
 ### Evidence Sources
 
-- Windows Event Logs
-- PowerShell Operational Logs
-- Process Execution Logs
-- Endpoint Security Alerts
-- Command-Line Analysis
-- Threat Intelligence Review
+- PowerShell Command Review
+- Command Decoding Analysis
+- Process Enumeration Output
+- Analyst Review
+- IOC Correlation
 
 ### Key Findings
 
-- Encoded PowerShell command execution identified
-- Command-line arguments required decoding for review
-- Parent process relationship required validation
-- User activity context required verification
-- No confirmed persistence mechanisms identified during initial review
+- PowerShell executed using an encoded command.
+- The command was successfully decoded.
+- Decoded command performed process enumeration.
+- No file downloads were observed.
+- No external network communications were identified.
+- No persistence mechanisms were detected.
+- No privilege escalation behavior was observed.
 
 ---
 
-## PowerShell Findings
+## PowerShell Execution Details
 
-| Source | Finding |
+### Encoded Command
+
+```powershell
+powershell.exe -EncodedCommand RwBlAHQALQBQAHIAbwBjAGUAcwBzAA==
+```
+
+### Decoded Command
+
+```powershell
+Get-Process
+```
+
+### Command Function
+
+The `Get-Process` cmdlet retrieves information regarding processes currently running on a Windows system.
+
+The command is commonly used by:
+
+- System Administrators
+- IT Support Personnel
+- Security Analysts
+- Incident Responders
+
+for system monitoring and troubleshooting activities.
+
+---
+
+## Behavioral Analysis
+
+The decoded command was analyzed to determine whether it exhibited characteristics commonly associated with malicious PowerShell activity.
+
+| Behavior | Observed |
 |---|---|
-| Process Execution Review | Encoded PowerShell execution observed |
-| Command-Line Analysis | Base64-encoded arguments identified |
-| PowerShell Logging | Additional script activity pending review |
-| Endpoint Review | No confirmed malware artifacts identified |
-| Threat Intelligence Review | No confirmed attribution identified during initial analysis |
+| Process Enumeration | Yes |
+| File Download | No |
+| External Network Connection | No |
+| Registry Modification | No |
+| Persistence Creation | No |
+| Privilege Escalation | No |
+| Credential Access | No |
 
-The collected findings supported continued analysis and validation of the PowerShell execution activity.
+The observed behavior was consistent with legitimate administrative activity.
 
 ---
 
 ## MITRE ATT&CK Mapping
 
-| Tactic | Technique | ID |
-|---|---|---|
-| Execution | PowerShell | T1059.001 |
-| Defense Evasion | Obfuscated Files or Information | T1027 |
-| Discovery | System Information Discovery | T1082 |
-| Execution | Command and Scripting Interpreter | T1059 |
+| Tactic | Technique | ID | Evidence |
+|---|---|---|---|
+| Discovery | Process Discovery | T1057 | Get-Process enumerates active processes |
+| Execution | PowerShell | T1059.001 | PowerShell used to execute command |
+| Defense Evasion | Obfuscated/Encoded Files and Information | T1027 | Encoded PowerShell command observed |
 
 ---
 
@@ -89,41 +124,63 @@ The collected findings supported continued analysis and validation of the PowerS
 
 | IOC Type | Value | Context |
 |---|---|---|
-| Process Name | powershell.exe | Suspicious execution process |
-| Command Line | TBD | Encoded command execution |
-| Parent Process | TBD | Source process relationship |
-| Endpoint | TBD | Affected workstation |
-| User Account | TBD | Associated account activity |
+| Process Name | powershell.exe | PowerShell execution |
+| Encoded Command | RwBlAHQALQBQAHIAbwBjAGUAcwBzAA== | Encoded PowerShell argument |
+| Decoded Command | Get-Process | Process enumeration activity |
+| Hostname | WIN-WS-001 | Investigated endpoint |
+| User Account | angel | Executing user |
 
 ---
 
 ## Analyst Assessment
 
-Based on the available evidence, the PowerShell activity was assessed as suspicious due to the use of encoded command-line arguments and execution behavior requiring further validation. While encoded PowerShell commands are not inherently malicious, they are commonly associated with attacker tradecraft and warrant additional investigation when observed outside normal administrative workflows.
+The investigation successfully decoded and reviewed the PowerShell command associated with the alert.
 
-At the current stage of analysis, no confirmed malicious payload execution has been identified. Additional log review, command decoding, and endpoint validation are recommended to determine the legitimacy of the observed activity.
+Although encoded PowerShell execution is frequently associated with attacker tradecraft, the decoded command performed only process enumeration and did not demonstrate behaviors commonly associated with malicious activity.
 
-The investigation highlights the importance of monitoring scripting environments and reviewing encoded command execution as part of endpoint detection and response workflows.
+The command did not attempt to:
+
+- Download external content
+- Establish network connections
+- Modify system configurations
+- Create persistence mechanisms
+- Escalate privileges
+- Access credentials
+
+Based on the collected evidence, the activity was determined to be consistent with legitimate administrative or investigative use of PowerShell.
 
 ---
 
 ## Recommendations
 
-- Decode and analyze the PowerShell command
-- Review PowerShell Operational Logs for related activity
-- Validate user intent and administrative context
-- Review parent-child process relationships
-- Increase monitoring for additional PowerShell execution events
-- Preserve relevant endpoint logs and artifacts
-- Escalate if evidence of persistence, malware execution, or credential access is identified
+- Continue monitoring PowerShell activity for encoded commands.
+- Review command behavior rather than relying solely on encoded-command detections.
+- Maintain PowerShell logging where available.
+- Investigate future encoded commands on a case-by-case basis.
+- Preserve evidence for training and analyst development purposes.
 
 ---
 
 ## Conclusion
 
-The investigation identified suspicious encoded PowerShell execution on a Windows endpoint. While no confirmed malicious activity was identified during the initial review, several characteristics commonly associated with attacker behavior were present and warranted additional analysis.
+The investigation identified PowerShell execution using an encoded command-line argument and successfully decoded the underlying command.
 
-The case demonstrates the importance of PowerShell visibility, endpoint monitoring, and analyst review when evaluating potentially suspicious scripting activity within enterprise environments.
+Analysis determined that the command performed only process enumeration through the `Get-Process` cmdlet and did not exhibit characteristics commonly associated with malicious PowerShell activity.
+
+This case demonstrates the importance of validating command behavior before classifying activity as malicious and highlights the role of PowerShell analysis within SOC investigation workflows.
+
+---
+
+## Investigation Workflow
+
+1. PowerShell alert identified
+2. Encoded command collected
+3. Base64 string decoded
+4. Decoded command reviewed
+5. Process behavior analyzed
+6. MITRE ATT&CK mapping performed
+7. IOC documentation completed
+8. Analyst assessment documented
 
 ---
 
