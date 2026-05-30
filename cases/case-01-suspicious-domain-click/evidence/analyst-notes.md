@@ -37,3 +37,20 @@
 ### Initial Assessment
 
 The URL appears to host downloadable content rather than a traditional webpage. The use of a direct IP address, non-standard port, downloadable archive content, and multiple malicious detections increases the likelihood that the URL is associated with malware distribution activity.
+
+## URLScan Findings
+
+### Scan Result
+
+URLScan was unable to successfully retrieve content from the target IP address.
+
+### Observations
+
+- URLScan reported that the website could not be scanned successfully.
+- No webpage content was rendered.
+- No screenshot preview was generated.
+- The target may be unavailable, temporarily offline, protected, or no longer serving content.
+
+### Analyst Interpretation
+
+The inability to retrieve content does not indicate that the URL is benign. Combined with the VirusTotal detections and malware-related tags, the unavailable infrastructure may be consistent with short-lived or unstable malicious infrastructure commonly observed during malware distribution campaigns.
