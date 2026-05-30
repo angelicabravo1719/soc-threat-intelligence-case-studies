@@ -54,3 +54,25 @@ URLScan was unable to successfully retrieve content from the target IP address.
 ### Analyst Interpretation
 
 The inability to retrieve content does not indicate that the URL is benign. Combined with the VirusTotal detections and malware-related tags, the unavailable infrastructure may be consistent with short-lived or unstable malicious infrastructure commonly observed during malware distribution campaigns.
+
+## AbuseIPDB Findings
+
+### IP Address
+
+123.10.239.8
+
+### Reputation Information
+
+- Abuse Confidence Score: 16%
+- Reports: 2
+- ASN: AS4837
+- ISP: China Unicom Henan Province Network
+- Usage Type: Fixed Line ISP
+- Country: China
+- City: Zhengzhou, Henan
+
+### Analyst Interpretation
+
+The IP address has been reported within AbuseIPDB and carries a moderate abuse reputation score. While the confidence score alone is not sufficient to classify the infrastructure as malicious, the reputation data supports additional scrutiny when combined with the VirusTotal detections, malware-related tags, and URLHaus listing.
+
+The infrastructure appears to be associated with a residential or fixed-line provider rather than a major cloud hosting provider. Additional context should be considered alongside all other evidence sources before determining final risk.
