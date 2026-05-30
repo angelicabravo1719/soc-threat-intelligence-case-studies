@@ -62,6 +62,28 @@ The authentication activity may represent unauthorized use of valid credentials.
 
 ### Authentication Logs
 
+The following authentication events were identified:
+
+| Timestamp | User | Source IP | Resource |
+|---|---|---|---|
+| 2026-05-13 22:41 EST | privileged-user | 203.0.113.45 | Internal Portal |
+| 2026-05-13 22:44 EST | privileged-user | 203.0.113.45 | File Share |
+| 2026-05-13 22:49 EST | privileged-user | 203.0.113.45 | Admin Console |
+
+### Observed Behavior
+
+- Successful authentication occurred outside normal business hours.
+- MFA approval was successfully completed.
+- The same source IP accessed multiple enterprise resources.
+- Access included a privileged administrative resource.
+- Activity occurred within a short timeframe following authentication.
+
+### Preliminary Assessment
+
+The observed authentication sequence may be consistent with legitimate administrative activity; however, the combination of unfamiliar infrastructure, privileged account access, and after-hours activity warrants additional investigation.
+
+### Authentication Logs
+
 - Authentication succeeded.
 - MFA approval recorded.
 - Activity occurred outside normal business hours.
