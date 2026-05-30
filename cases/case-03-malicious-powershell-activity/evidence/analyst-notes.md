@@ -2,7 +2,7 @@
 
 ## Alert Summary
 
-- Alert Type: Suspicious PowerShell Execution
+- Alert Type: Suspicious Encoded PowerShell Activity
 - Hostname: WIN-WS-001
 - User Account: jdoe
 - Process Name: powershell.exe
@@ -14,22 +14,20 @@
 ## Initial Observations
 
 - PowerShell executed with encoded command-line arguments.
-- Activity originated from a user workstation.
-- Encoded commands are frequently used for automation but may also be used to conceal malicious activity.
-- Additional review is required to determine intent.
+- Encoded PowerShell commands are frequently used for both legitimate administration and malicious activity.
+- Additional analysis is required to determine command intent.
+- No evidence of malicious execution has been confirmed at this stage.
 
 ---
 
 ## Investigation Questions
 
-The following questions will guide the investigation:
-
 1. What command was executed?
-2. Was the command legitimate administrative activity?
-3. Was PowerShell launched by a trusted parent process?
-4. Did the command attempt to download content or communicate externally?
-5. Were additional suspicious processes created?
-6. Is there evidence of persistence, privilege escalation, or credential access?
+2. Does the decoded command perform administrative or malicious actions?
+3. Was PowerShell launched by a trusted process?
+4. Did the command attempt to download files or communicate externally?
+5. Were additional processes spawned?
+6. Is there evidence of persistence or privilege escalation?
 
 ---
 
@@ -37,11 +35,11 @@ The following questions will guide the investigation:
 
 ### Hypothesis 1
 
-The activity represents legitimate administrative or automation-related PowerShell usage.
+The activity represents legitimate administrative PowerShell usage.
 
 ### Hypothesis 2
 
-The activity originated from a script or software deployment process.
+The activity originated from an automation or system management process.
 
 ### Hypothesis 3
 
@@ -51,18 +49,28 @@ The activity may represent suspicious PowerShell execution requiring escalation.
 
 ## Evidence Collected
 
-### PowerShell Logs
+### PowerShell Activity Review
 
-- Pending investigation.
+- PowerShell command execution reviewed.
+- Process enumeration performed using Get-Process.
+- Running processes successfully identified.
 
-### Command-Line Analysis
+### Screenshot Evidence
 
-- Pending investigation.
+- powershell-process-enumeration.png
 
-### Process Execution Review
+### Command Analysis
 
-- Pending investigation.
+- Pending decoding and validation.
 
 ### Threat Intelligence Review
 
 - Pending investigation.
+
+---
+
+## Current Assessment
+
+At the current stage of the investigation, insufficient evidence exists to classify the activity as malicious.
+
+Additional command analysis and behavioral review are required before determining final disposition.
